@@ -12,15 +12,17 @@ mv ~/ReasonableSystemInstall-Inator/alaska.jpg ~/Pictures/
 
 mkdir ~/.vim/
 
+mv ~/ReasonableSystemInstall-Inator/vimrc ~/.vimrc
+
 mv ~/ReasonableSystemInstall-Inator/autoload/ ~/.vim/
 
-mv ~/ReasonableSystemInstall-Inator/i3/ ~/.config/ 
+mv ~/ReasonableSystemInstall-Inator/i3/ ~/.config/
 
-mv ~/ReasonableSystemInstall-Inator/i3status/ ~/.config/ 
+mv ~/ReasonableSystemInstall-Inator/i3status/ ~/.config/
 
 mv ~/ReasonableSystemInstall-Inator/vimrc ~/.vimrc
 
-echo -e " $GREEN Do you wish to set up multiple monitors? (y/n) $NOPE " 
+echo -e " $GREEN Would you like to use a GUI to configure multiple monitors? (y/n) $NOPE " 
 read RANDR
 if [[ $RANDR == "y" || $RANDR == "Y" || $RANDR == "yes" || $RANDR == "Yes" ]]
 then 
@@ -39,15 +41,23 @@ then
 
 echo -e  " $GREEN Hold tight while your Vim plugins are installed $NOPE " 
 
-sleep 1s 
+sleep 2s 
 
-xfce4-terminal -x vim -c PlugInstall
+vim -c "PlugInstall|q|q"
 
-sleep 10s
+sleep 3s
 
-sudo killall vim 
+echo -e " $GREEN Are you currently using a GUI? (y/n) $NOPE " 
+read GUI
+if [[ $GUI == "y" || $GUI == "Y" || $GUI == "yes" || $GUI == "Yes" ]] 
+then
 
 echo -e " $GREEN You're done! Read more about your new system! $NOPE "
 zathura ~/ReasonableSystemInstall-Inator/GUIDE.pdf 
 
+else 
+
+echo -e " $GREEN You're done! Use startx to login and read the guide. $NOPE " 
+fi 
+ 
 fi 
